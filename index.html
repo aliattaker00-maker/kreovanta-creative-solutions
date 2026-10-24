@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreovanta Creative Solutions | Streaming Art & Graphics Agency</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#070707',
+                            darker: '#0d0d0e',
+                            card: '#141416',
+                            border: '#26262a',
+                            red: '#991b1b',
+                            redHover: '#dc2626',
+                            gold: '#d97706',
+                            goldLight: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #070707;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .glow-red {
+            box-shadow: 0 0 25px -5px rgba(153, 27, 27, 0.4);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px -5px rgba(217, 119, 6, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d0d0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #991b1b;
+            border-radius: 4px;
+        }
+        .gradient-text-red {
+            background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .content-blur {
+            filter: blur(20px) !important;
+            transition: filter 0.1s ease;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar antialiased selection:bg-red-900 selection:text-white" oncontextmenu="return false;">
+
+    <!-- Screenshot & Inspect Protection Modal -->
+    <div id="protectionModal" class="hidden fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4">
+        <div class="bg-brand-card border-2 border-brand-red p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative glow-red">
+            <div class="w-16 h-16 bg-brand-red/20 text-brand-red rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-red/50">
+                <i class="fas fa-shield-alt text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">Action Restricted!</h3>
+            <p class="text-gray-300 text-xs mb-6 leading-relaxed">
+                Screenshots, Inspect Element, and Right-Click functionality are strictly restricted on Kreovanta Creative Solutions to protect artwork.
+            </p>
+            <button onclick="closeProtectionModal()" class="w-full bg-brand-red hover:bg-brand-redHover text-white font-bold py-3 rounded-xl transition text-sm">
+                I Understand
+            </button>
+        </div>
+    </div>
+
+    <div id="mainSiteContent">
+        <!-- Top Navigation Bar -->
+        <header class="fixed top-0 w-full z-40 bg-brand-black/90 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-red to-black border border-brand-red/50 flex items-center justify-center glow-red">
+                        <i class="fas fa-paint-brush text-brand-goldLight text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider text-white uppercase">KREOVANTA</span>
+                        <span class="block text-[10px] font-semibold text-brand-goldLight tracking-widest uppercase">CREATIVE SOLUTIONS</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-1 bg-brand-darker/80 p-1.5 rounded-2xl border border-brand-border">
+                    <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-white bg-brand-red shadow-lg">
+                        <i class="fas fa-home mr-2 text-xs"></i>Home
+                    </button>
+                    <button onclick="switchPage('portfolio')" id="nav-portfolio" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-400 hover:text-white hover:bg-brand-card">
+                        <i class="fas fa-layer-group mr-2 text-xs"></i>Work Showcase
+                    </button>
+                    <button onclick="switchPage('reviews')" id="nav-reviews" class="nav-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-400 hover:text-white hover:bg-brand-card">
+                        <i class="fas fa-star mr-2 text-xs"></i>Ratings & Reviews
+                    </button>
+                </nav>
+
+                <!-- Action Buttons & Contact -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="openAdminModal()" class="hidden sm:flex items-center space-x-2 bg-brand-card hover:bg-brand-border border border-brand-gold/40 text-brand-goldLight px-4 py-2 rounded-xl text-xs font-bold transition duration-200">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Project</span>
+                    </button>
+                    <a href="mailto:berryybliss09@gmail.com" class="bg-gradient-to-r from-brand-red to-red-800 hover:from-red-700 hover:to-red-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition duration-200 shadow-md glow-red flex items-center space-x-2">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email Us</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2 text-xl focus:outline-none">
+                        <i class="fas fa-bars" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer -->
+            <div id="mobileMenu" class="hidden md:hidden bg-brand-card border-b border-brand-border px-4 pt-2 pb-6 space-y-2">
+                <button onclick="switchPage('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-white bg-brand-red/30">Home</button>
+                <button onclick="switchPage('portfolio'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-gray-300 hover:bg-brand-border">Work Showcase</button>
+                <button onclick="switchPage('reviews'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-gray-300 hover:bg-brand-border">Ratings & Reviews</button>
+                <button onclick="openAdminModal(); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-brand-goldLight border border-brand-gold/30">
+                    <i class="fas fa-plus-circle mr-2"></i> Add New Project
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTAINER -->
+        <main class="pt-24 min-h-screen">
+
+            <!-- PAGE 1: HOME PAGE -->
+            <section id="page-home" class="page-content">
+                <!-- Hero Section -->
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex flex-col items-center text-center">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-red/15 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Badge -->
+                    <div class="inline-flex items-center space-x-2 bg-brand-card/90 border border-brand-gold/30 px-4 py-2 rounded-full mb-8 glow-gold">
+                        <span class="w-2 h-2 rounded-full bg-brand-goldLight animate-pulse"></span>
+                        <span class="text-xs font-bold text-brand-goldLight tracking-wide uppercase">Elite Streaming Art Studio</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight">
+                        Kreovanta <span class="gradient-text-red">Creative Solutions</span>
+                    </h1>
+
+                    <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl font-normal leading-relaxed">
+                        Specialized in Logos, Animation Overlays, Stream Overlays, Banners, Custom Emotes, and VTuber Avatars for top content creators.
+                    </p>
+
+                    <!-- Clickable Contact Links -->
+                    <div class="mt-10 flex flex-wrap items-center justify-center gap-4 w-full sm:w-auto">
+                        <a href="mailto:berryybliss09@gmail.com" class="px-6 py-3.5 rounded-xl bg-brand-red hover:bg-brand-redHover text-white font-bold text-sm shadow-xl glow-red transition duration-200 flex items-center space-x-2">
+                            <i class="fas fa-envelope text-brand-goldLight"></i>
+                            <span>berryybliss09@gmail.com</span>
+                        </a>
+                        <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="px-6 py-3.5 rounded-xl bg-brand-card hover:bg-brand-border border border-brand-border text-gray-200 font-bold text-sm transition duration-200 flex items-center space-x-2">
+                            <i class="fab fa-x-twitter text-brand-goldLight"></i>
+                            <span>Twitter (X)</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@ariana_martin4" target="_blank" class="px-6 py-3.5 rounded-xl bg-brand-card hover:bg-brand-border border border-brand-border text-gray-200 font-bold text-sm transition duration-200 flex items-center space-x-2">
+                            <i class="fab fa-tiktok text-brand-goldLight"></i>
+                            <span>TikTok</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Categories Spotlight -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-brand-border/50">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-white">Our Creative Services</h2>
+                        <p class="text-gray-400 mt-2 text-sm">Select any category to view dedicated project files</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Logos -->
+                        <div onclick="goToCategory('logos')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-red/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-icons text-3xl text-brand-red mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">Logos</h3>
+                            <p class="text-xs text-gray-400">25 Design files in catalog.</p>
+                        </div>
+
+                        <!-- Animation Overlay -->
+                        <div onclick="goToCategory('animation_overlay')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-gold/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-video text-3xl text-brand-goldLight mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">Animation Overlay</h3>
+                            <p class="text-xs text-gray-400">6 Motion files in catalog.</p>
+                        </div>
+
+                        <!-- Overlay -->
+                        <div onclick="goToCategory('overlay')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-red/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-desktop text-3xl text-brand-red mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">Overlay</h3>
+                            <p class="text-xs text-gray-400">9 Overlay files in catalog.</p>
+                        </div>
+
+                        <!-- Banners -->
+                        <div onclick="goToCategory('banners')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-gold/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-image text-3xl text-brand-goldLight mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">Banners</h3>
+                            <p class="text-xs text-gray-400">11 Banner files in catalog.</p>
+                        </div>
+
+                        <!-- Emotes -->
+                        <div onclick="goToCategory('emotes')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-red/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-smile text-3xl text-brand-red mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">Emotes</h3>
+                            <p class="text-xs text-gray-400">16 Emote files in catalog.</p>
+                        </div>
+
+                        <!-- VTuber -->
+                        <div onclick="goToCategory('vtuber')" class="group cursor-pointer bg-brand-card hover:bg-brand-darker border border-brand-border hover:border-brand-gold/60 p-6 rounded-2xl transition duration-300">
+                            <i class="fas fa-user-astronaut text-3xl text-brand-goldLight mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-1">VTuber</h3>
+                            <p class="text-xs text-gray-400">10 VTuber files in catalog.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: PORTFOLIO SHOWCASE PAGE -->
+            <section id="page-portfolio" class="page-content hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-card px-3 py-1 rounded-full border border-brand-gold/30">Category Showcase</span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">Studio Work Showcase</h1>
+                        <p class="text-gray-400 mt-2 text-sm">Select a category below to filter artwork files.</p>
+                    </div>
+
+                    <!-- CATEGORY NAVIGATION TABS -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 mb-10 bg-brand-card p-2 rounded-2xl border border-brand-border max-w-4xl mx-auto">
+                        <button onclick="setCategoryFilter('logos')" id="tab-logos" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-white bg-brand-red">Logos</button>
+                        <button onclick="setCategoryFilter('animation_overlay')" id="tab-animation_overlay" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-gray-400 hover:text-white">Animation Overlay</button>
+                        <button onclick="setCategoryFilter('overlay')" id="tab-overlay" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-gray-400 hover:text-white">Overlay</button>
+                        <button onclick="setCategoryFilter('banners')" id="tab-banners" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-gray-400 hover:text-white">Banners</button>
+                        <button onclick="setCategoryFilter('emotes')" id="tab-emotes" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-gray-400 hover:text-white">Emotes</button>
+                        <button onclick="setCategoryFilter('vtuber')" id="tab-vtuber" class="cat-tab px-4 py-2.5 rounded-xl text-xs font-bold transition duration-200 text-gray-400 hover:text-white">VTuber</button>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-6 border-b border-brand-border pb-4">
+                        <div class="flex items-center space-x-3">
+                            <h2 id="currentCategoryTitle" class="text-xl font-bold text-white">Showing: Logos</h2>
+                            <span id="itemCountBadge" class="bg-brand-red/30 text-brand-goldLight text-xs px-2.5 py-1 rounded-md font-mono border border-brand-red/40">0 items</span>
+                        </div>
+                        <button onclick="openAdminModal()" class="text-xs bg-brand-card hover:bg-brand-border border border-brand-border text-brand-goldLight px-3 py-1.5 rounded-lg flex items-center space-x-1">
+                            <i class="fas fa-plus-circle"></i>
+                            <span class="hidden sm:inline">Add Item Here</span>
+                        </button>
+                    </div>
+
+                    <!-- PORTFOLIO GRID -->
+                    <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Injected via JavaScript -->
+                    </div>
+
+                    <div id="emptyState" class="hidden text-center py-20 bg-brand-card/40 rounded-3xl border border-dashed border-brand-border">
+                        <i class="fas fa-folder-open text-4xl text-gray-600 mb-3"></i>
+                        <p class="text-gray-400 text-base font-semibold">No artwork added in this category yet.</p>
+                        <button onclick="openAdminModal()" class="mt-4 px-4 py-2 bg-brand-red text-white text-xs font-bold rounded-xl">Add First Item</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: CLIENT RATINGS & REVIEWS PAGE -->
+            <section id="page-reviews" class="page-content hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <span class="text-xs font-bold text-brand-goldLight uppercase tracking-widest bg-brand-card px-3 py-1 rounded-full border border-brand-gold/30">Client Feedback</span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-3">Ratings & Testimonials</h1>
+                        <p class="text-gray-400 mt-2 text-sm">Real reviews from content creators and streamers worldwide.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1 bg-brand-card p-6 rounded-2xl border border-brand-border h-fit sticky top-28">
+                            <h2 class="text-xl font-bold text-white mb-1">Leave a Review</h2>
+                            <p class="text-xs text-gray-400 mb-6">Worked with Kreovanta Creative Solutions? Share your feedback.</p>
+
+                            <form id="reviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Your Name</label>
+                                    <input type="text" id="revName" required placeholder="e.g. Alex" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Project Category</label>
+                                    <select id="revCategory" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red">
+                                        <option value="logos">Logos</option>
+                                        <option value="animation_overlay">Animation Overlay</option>
+                                        <option value="overlay">Overlay</option>
+                                        <option value="banners">Banners</option>
+                                        <option value="emotes">Emotes</option>
+                                        <option value="vtuber">VTuber</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Star Rating</label>
+                                    <div class="flex items-center space-x-2 bg-brand-darker p-3 rounded-xl border border-brand-border">
+                                        <div class="flex text-brand-goldLight text-lg space-x-1" id="starPicker">
+                                            <i class="fas fa-star cursor-pointer" onclick="setRating(1)"></i>
+                                            <i class="fas fa-star cursor-pointer" onclick="setRating(2)"></i>
+                                            <i class="fas fa-star cursor-pointer" onclick="setRating(3)"></i>
+                                            <i class="fas fa-star cursor-pointer" onclick="setRating(4)"></i>
+                                            <i class="fas fa-star cursor-pointer" onclick="setRating(5)"></i>
+                                        </div>
+                                        <span id="ratingScoreText" class="text-xs font-bold text-gray-400 ml-auto">5.0 / 5</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Detailed Feedback</label>
+                                    <textarea id="revComment" required rows="4" placeholder="Describe your experience..." class="w-full bg-brand-darker border border-brand-border rounded-xl p-4 text-sm text-white focus:outline-none focus:border-brand-red"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full bg-gradient-to-r from-brand-red to-red-800 hover:from-red-700 hover:to-red-900 text-white font-bold py-3 rounded-xl text-sm transition glow-red">
+                                    Submit Review
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border flex items-center justify-between flex-wrap gap-4">
+                                <div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-4xl font-extrabold text-white">5.0</span>
+                                        <div>
+                                            <div class="flex text-brand-goldLight text-sm">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="text-xs text-gray-400">Verified Client Feedback</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="reviewsList" class="space-y-4">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-brand-darker border-t border-brand-border py-12 mt-20 text-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+                <div class="flex items-center justify-center space-x-3">
+                    <span class="text-lg font-bold text-white uppercase tracking-wider">Kreovanta Creative Solutions</span>
+                </div>
+                <div class="flex justify-center gap-6 text-sm text-brand-goldLight pt-2">
+                    <a href="mailto:berryybliss09@gmail.com" class="hover:text-white transition"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="hover:text-white transition"><i class="fab fa-x-twitter"></i> Twitter</a>
+                    <a href="https://www.tiktok.com/@ariana_martin4" target="_blank" class="hover:text-white transition"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+                <p class="text-xs text-gray-500 pt-2">© 2026 Kreovanta Creative Solutions. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Project Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-brand-card border border-brand-border rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-2 flex items-center space-x-2">
+                <i class="fas fa-plus-circle text-brand-goldLight"></i>
+                <span>Add Studio Project</span>
+            </h3>
+            <p class="text-xs text-gray-400 mb-6">Add a new design into the specific file catalog.</p>
+
+            <form id="addProjectForm" onsubmit="handleProjectSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Target Category</label>
+                    <select id="projCategory" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red">
+                        <option value="logos">Logos (25 Files)</option>
+                        <option value="animation_overlay">Animation Overlay (6 Files)</option>
+                        <option value="overlay">Overlay (9 Files)</option>
+                        <option value="banners">Banners (11 Files)</option>
+                        <option value="emotes">Emotes (16 Files)</option>
+                        <option value="vtuber">VTuber (10 Files)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Project Title / File Name</label>
+                    <input type="text" id="projTitle" required placeholder="e.g. logos1 or Custom Design" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Image File Name / URL</label>
+                    <input type="text" id="projImage" required placeholder="e.g. logos1.jpg or URL" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Short Description</label>
+                    <textarea id="projDesc" required rows="3" placeholder="Describe the artwork..." class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-red hover:bg-brand-redHover text-white font-bold py-3.5 rounded-xl text-sm transition glow-red">
+                    Publish to Portfolio
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-gray-300 hover:text-white text-3xl z-10">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="max-w-4xl w-full text-center">
+            <div id="lightboxContainer" class="mx-auto"></div>
+            <h3 id="lightboxTitle" class="text-2xl font-bold text-white mt-4"></h3>
+            <p id="lightboxDesc" class="text-sm text-gray-400 mt-1 max-w-xl mx-auto"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- SEQUENTIAL BACKEND FILE NAMES GENERATION ---
+        function generateCategoryFiles(prefix, count, categoryKey, labelText) {
+            let files = [];
+            for (let i = 1; i <= count; i++) {
+                files.push({
+                    id: `${categoryKey}_${i}`,
+                    category: categoryKey,
+                    title: `${labelText} ${i}`,
+                    image: `${prefix}${i}.jpg`, // Backend sequential file name
+                    fallbackText: `${labelText} Photo`,
+                    description: `Official ${labelText} file catalog asset #${i}.`
+                });
+            }
+            return files;
+        }
+
+        // Initialize Catalog Arrays
+        let defaultCatalog = [
+            ...generateCategoryFiles('logos', 25, 'logos', 'Logos'),
+            ...generateCategoryFiles('animation_overlay', 6, 'animation_overlay', 'Animation Overlay'),
+            ...generateCategoryFiles('overlay', 9, 'overlay', 'Overlay'),
+            ...generateCategoryFiles('banner', 11, 'banners', 'Banners'),
+            ...generateCategoryFiles('emote', 16, 'emotes', 'Emotes'),
+            ...generateCategoryFiles('vtuber', 10, 'vtuber', 'VTuber')
+        ];
+
+        let portfolioItems = JSON.parse(localStorage.getItem('kreovanta_portfolio_items')) || defaultCatalog;
+
+        let reviewsList = JSON.parse(localStorage.getItem('kreovanta_reviews_list')) || [
+            {
+                name: "Alex",
+                category: "vtuber",
+                rating: 5,
+                comment: "Amazing VTuber model files and smooth overlay animations!",
+                date: "Oct 24, 2026"
+            }
+        ];
+
+        let currentCategory = 'logos';
+        let currentSelectedRating = 5;
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-white', 'bg-brand-red', 'shadow-lg');
+                btn.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-brand-card');
+            });
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-brand-card');
+                activeNav.classList.add('text-white', 'bg-brand-red', 'shadow-lg');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (pageId === 'portfolio') renderPortfolio();
+            if (pageId === 'reviews') renderReviews();
+        }
+
+        function goToCategory(cat) {
+            switchPage('portfolio');
+            setCategoryFilter(cat);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function setCategoryFilter(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-tab').forEach(btn => {
+                btn.classList.remove('text-white', 'bg-brand-red', 'shadow-lg');
+                btn.classList.add('text-gray-400', 'hover:text-white');
+            });
+            const activeTab = document.getElementById(`tab-${cat}`);
+            if (activeTab) {
+                activeTab.classList.remove('text-gray-400', 'hover:text-white');
+                activeTab.classList.add('text-white', 'bg-brand-red', 'shadow-lg');
+            }
+
+            const titles = {
+                'logos': 'Showing: Logos (25 Files)',
+                'animation_overlay': 'Showing: Animation Overlay (6 Files)',
+                'overlay': 'Showing: Overlay (9 Files)',
+                'banners': 'Showing: Banners (11 Files)',
+                'emotes': 'Showing: Emotes (16 Files)',
+                'vtuber': 'Showing: VTuber (10 Files)'
+            };
+            document.getElementById('currentCategoryTitle').innerText = titles[cat];
+            renderPortfolio();
+        }
+
+        function getCategoryLabel(cat) {
+            const labels = {
+                'logos': 'Logos Photo',
+                'animation_overlay': 'Animation Overlay Photo',
+                'overlay': 'Overlay Photo',
+                'banners': 'Banners Photo',
+                'emotes': 'Emotes Photo',
+                'vtuber': 'VTuber Photo'
+            };
+            return labels[cat] || 'Photo';
+        }
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolioGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            const filtered = portfolioItems.filter(item => item.category === currentCategory);
+            document.getElementById('itemCountBadge').innerText = `${filtered.length} items`;
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            filtered.forEach(item => {
+                const label = item.fallbackText || getCategoryLabel(item.category);
+                const card = document.createElement('div');
+                card.className = "bg-brand-card border border-brand-border rounded-2xl overflow-hidden hover:border-brand-red/60 transition duration-300 group flex flex-col";
+                card.innerHTML = `
+                    <div class="relative h-60 bg-brand-darker overflow-hidden cursor-pointer flex items-center justify-center" onclick="openLightbox('${item.image}', '${escapeHtml(item.title)}', '${escapeHtml(item.description)}', '${escapeHtml(label)}')">
+                        <img src="${item.image}" alt="${label}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onError="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        
+                        <!-- Fallback Text Display when photo is not found -->
+                        <div class="hidden w-full h-full bg-brand-darker border-2 border-dashed border-brand-border flex-col items-center justify-center p-4 text-center">
+                            <i class="fas fa-image text-3xl text-brand-goldLight mb-2"></i>
+                            <span class="text-sm font-bold text-white">${label}</span>
+                            <span class="text-[10px] text-gray-500 font-mono mt-1">${item.image}</span>
+                        </div>
+
+                        <span class="absolute bottom-3 right-3 bg-brand-black/80 text-brand-goldLight text-[10px] font-bold px-2.5 py-1 rounded-md border border-brand-border">
+                            <i class="fas fa-search-plus mr-1"></i> Preview
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-goldLight transition">${item.title}</h3>
+                            <p class="text-xs text-gray-400 leading-relaxed">${item.description}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-500">
+                            <span class="uppercase tracking-wider font-semibold">${item.category.replace('_', ' ').toUpperCase()}</span>
+                            <button onclick="openLightbox('${item.image}', '${escapeHtml(item.title)}', '${escapeHtml(item.description)}', '${escapeHtml(label)}')" class="text-brand-goldLight hover:underline font-bold">View Details</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function handleProjectSubmit(e) {
+            e.preventDefault();
+            const category = document.getElementById('projCategory').value;
+            const title = document.getElementById('projTitle').value.trim();
+            const image = document.getElementById('projImage').value.trim();
+            const description = document.getElementById('projDesc').value.trim();
+            const fallbackText = getCategoryLabel(category);
+
+            portfolioItems.unshift({ id: Date.now(), category, title, image, fallbackText, description });
+            localStorage.setItem('kreovanta_portfolio_items', JSON.stringify(portfolioItems));
+
+            document.getElementById('addProjectForm').reset();
+            closeAdminModal();
+            switchPage('portfolio');
+            setCategoryFilter(category);
+        }
+
+        function openLightbox(img, title, desc, labelText) {
+            const container = document.getElementById('lightboxContainer');
+            container.innerHTML = `
+                <img src="${img}" alt="${labelText}" class="max-h-[70vh] mx-auto rounded-2xl border border-brand-border shadow-2xl object-contain" onError="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="hidden max-w-md h-64 mx-auto bg-brand-darker border-2 border-dashed border-brand-border flex-col items-center justify-center p-6 text-center rounded-2xl">
+                    <i class="fas fa-image text-4xl text-brand-goldLight mb-3"></i>
+                    <span class="text-lg font-bold text-white">${labelText}</span>
+                    <span class="text-xs text-gray-400 font-mono mt-1">${img}</span>
+                </div>
+            `;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() { document.getElementById('lightboxModal').classList.add('hidden'); }
+
+        function setRating(score) {
+            currentSelectedRating = score;
+            document.getElementById('ratingScoreText').innerText = `${score}.0 / 5`;
+            document.querySelectorAll('#starPicker i').forEach((star, idx) => {
+                star.className = idx < score ? "fas fa-star cursor-pointer text-brand-goldLight" : "far fa-star cursor-pointer text-gray-600";
+            });
+        }
+
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('revName').value.trim();
+            const category = document.getElementById('revCategory').value;
+            const comment = document.getElementById('revComment').value.trim();
+
+            reviewsList.unshift({
+                name, category, rating: currentSelectedRating, comment,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            });
+            localStorage.setItem('kreovanta_reviews_list', JSON.stringify(reviewsList));
+            document.getElementById('reviewForm').reset();
+            setRating(5);
+            renderReviews();
+        }
+
+        function renderReviews() {
+            const list = document.getElementById('reviewsList');
+            list.innerHTML = '';
+            reviewsList.forEach(rev => {
+                const card = document.createElement('div');
+                card.className = "bg-brand-card p-6 rounded-2xl border border-brand-border";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">${rev.name}</h4>
+                            <span class="text-[10px] text-brand-goldLight bg-brand-darker px-2 py-0.5 rounded border border-brand-border">${rev.category.replace('_', ' ').toUpperCase()}</span>
+                        </div>
+                        <span class="text-xs text-gray-500">${rev.date}</span>
+                    </div>
+                    <div class="flex text-brand-goldLight text-xs mb-2">${'<i class="fas fa-star"></i>'.repeat(rev.rating)}</div>
+                    <p class="text-xs text-gray-300 leading-relaxed">"${rev.comment}"</p>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function closeProtectionModal() {
+            document.getElementById('protectionModal').classList.add('hidden');
+        }
+
+        function showProtectionModal() {
+            document.getElementById('protectionModal').classList.remove('hidden');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        // --- SECURITY & SCREENSHOT RESTRICTIONS ---
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            showProtectionModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) ||
+                (e.metaKey && e.altKey && (e.key === 'i' || e.key === 'I')) ||
+                e.key === 'PrintScreen' ||
+                (e.metaKey && e.shiftKey && (e.key === 'S' || e.key === 's'))
+            ) {
+                e.preventDefault();
+                showProtectionModal();
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            const main = document.getElementById('mainSiteContent');
+            if (document.hidden) {
+                main.classList.add('content-blur');
+            } else {
+                main.classList.remove('content-blur');
+            }
+        });
+
+        // Initial render
+        renderPortfolio();
+        renderReviews();
+    </script>
+</body>
+</html>
