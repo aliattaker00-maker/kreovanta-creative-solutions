@@ -137,7 +137,8 @@
                     <i class="fas fa-envelope text-sm"></i>
                 </a>
                 <a href="https://x.com/ariana_martin88?s=11" target="_blank" title="Twitter (X)" class="w-9 h-9 rounded-xl bg-brand-card hover:bg-brand-red border border-brand-border text-gray-300 hover:text-white flex items-center justify-center transition">
-                    <i class="fab fa-x-twitter text-sm"></i>
+                    <!-- Bulletproof SVG X Logo -->
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
                 <a href="https://www.tiktok.com/@ariana_martin4" target="_blank" title="TikTok" class="w-9 h-9 rounded-xl bg-brand-card hover:bg-brand-red border border-brand-border text-gray-300 hover:text-white flex items-center justify-center transition">
                     <i class="fab fa-tiktok text-sm"></i>
@@ -190,8 +191,8 @@
                     <a href="mailto:berryybliss09@gmail.com" class="w-12 h-12 rounded-2xl bg-brand-card hover:bg-brand-red border border-brand-border text-brand-goldLight hover:text-white flex items-center justify-center text-xl transition duration-300 shadow-lg glow-red" title="Email Us">
                         <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-card hover:bg-brand-red border border-brand-border text-brand-goldLight hover:text-white flex items-center justify-center text-xl transition duration-300 shadow-lg glow-red" title="Twitter / X">
-                        <i class="fab fa-x-twitter"></i>
+                    <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-card hover:bg-brand-red border border-brand-border text-brand-goldLight hover:text-white flex items-center justify-center transition duration-300 shadow-lg glow-red" title="Twitter / X">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                     <a href="https://www.tiktok.com/@ariana_martin4" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-card hover:bg-brand-red border border-brand-border text-brand-goldLight hover:text-white flex items-center justify-center text-xl transition duration-300 shadow-lg glow-red" title="TikTok">
                         <i class="fab fa-tiktok"></i>
@@ -295,7 +296,7 @@
             </div>
         </section>
 
-        <!-- PAGE 3: CLIENT RATINGS & REVIEWS PAGE (RESPONSIVE STACKING FOR MOBILE) -->
+        <!-- PAGE 3: CLIENT RATINGS & REVIEWS PAGE -->
         <section id="page-reviews" class="page-content hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div class="text-center max-w-3xl mx-auto mb-12">
@@ -304,7 +305,6 @@
                     <p class="text-gray-400 mt-2 text-sm">Real reviews from content creators and streamers worldwide.</p>
                 </div>
 
-                <!-- Responsive Flex/Grid Layout preventing mobile overlap -->
                 <div class="flex flex-col lg:grid lg:grid-cols-3 gap-8">
                     <!-- Leave a Review Form Column -->
                     <div class="w-full lg:col-span-1 bg-brand-card p-6 rounded-2xl border border-brand-border h-fit">
@@ -387,7 +387,9 @@
             </div>
             <div class="flex justify-center gap-6 text-[18px] text-brand-goldLight pt-2">
                 <a href="mailto:berryybliss09@gmail.com" class="hover:text-white transition" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="hover:text-white transition" title="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://x.com/ariana_martin88?s=11" target="_blank" class="hover:text-white transition" title="Twitter / X">
+                    <svg class="w-4 h-4 fill-current inline-block" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
                 <a href="https://www.tiktok.com/@ariana_martin4" target="_blank" class="hover:text-white transition" title="TikTok"><i class="fab fa-tiktok"></i></a>
             </div>
             <p class="text-xs text-gray-500 pt-2">© 2026 Kreovanta Creative Solutions. All rights reserved.</p>
@@ -395,7 +397,7 @@
     </footer>
 
     <!-- Modals -->
-    <!-- Add Project Modal with File Input Support -->
+    <!-- Add Project Modal -->
     <div id="adminModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-brand-card border border-brand-border rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
             <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-lg">
@@ -421,7 +423,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Project Title</label>
-                    <input type="text" id="projTitle" required placeholder="e.g. Logos 26" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red">
+                    <input type="text" id="projTitle" required placeholder="e.g. Custom Logo 26" class="w-full bg-brand-darker border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Select File / Image</label>
